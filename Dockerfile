@@ -1,13 +1,27 @@
-FROM python:3.6
+# use a python image
+FROM python:3.8-slim
 
-ENV PYTHONDONTWRITEBYTECODE 1
+# set the working directory in the container to /app
+WORKDIR /app
 
-ENV PYTHONUNBUFFERED 1
+# add the current directory to the container as /app
+COPY . /app
 
-ADD . /code
+# pip install flask
+RUN pip install --upgrade pip && \
+    pip install \
+        Flask \
+        flake8 \
+        pylint \
+        pytest \
+        pytest-flask
 
-WORKDIR /code
+# expose the default flask port
+EXPOSE 8080
 
-RUN pip install -r requirements.txt
+# execute the Flask app
+ENTRYPOINT ["python"]
 
-CMD ["python", "app.py"]
+HEALTHCHECK CMD curl --fail http://localhost:8080/ || exit 1
+
+CMD ["/app/app.py"]
