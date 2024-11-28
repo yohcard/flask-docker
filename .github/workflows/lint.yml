@@ -17,9 +17,7 @@ jobs:
           pylint --errors-only --disable=C0301 --disable=C0326 *.py
       - name: unitest
         run: |
-          	python -m unittest --verbose --failfast
-
-
+          python -m unittest --verbose --failfast
   build:  # Nom du job
       needs: [install-lint]  # Dépend du job `lint`
       runs-on: ubuntu-latest  # S'exécute sur la dernière version d'Ubuntu
