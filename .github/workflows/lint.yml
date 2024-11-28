@@ -10,7 +10,7 @@ jobs:
         uses: actions/setup-python@v5
       - name: install des deps
         run: |
-         pip install --quiet --upgrade --requirement requirements.txt
+          pip install --quiet --upgrade --requirement requirements.txt
       - name: install flake8 & pylint
         run: |
           flake8 --ignore=E501,E231 *.py
