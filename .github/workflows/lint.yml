@@ -10,14 +10,16 @@ jobs:
         uses: actions/setup-python@v5
       - name: install des deps
         run: |
-          pip install --quiet --upgrade --requirement requirements.txt
+         pip install --quiet --upgrade --requirement requirements.txt
       - name: install flake8 & pylint
         run: |
           flake8 --ignore=E501,E231 *.py
           pylint --errors-only --disable=C0301 --disable=C0326 *.py
       - name: unitest
         run: |
-          
+          	python -m unittest --verbose --failfast
+
+
   build:  # Nom du job
       needs: [install-lint]  # Dépend du job `lint`
       runs-on: ubuntu-latest  # S'exécute sur la dernière version d'Ubuntu
