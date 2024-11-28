@@ -44,7 +44,5 @@ def not_found(error):
     Returns: HTTP 404 with r
     """
     return make_response(jsonify({'error': str(error)}), 404)
-
-
 if __name__ == '__main__':
     APP.run("0.0.0.0", port=8080, debug=True)
